@@ -9,10 +9,10 @@ env:
 before_install:
   # upgrade to newer docker version to avoid the "gpgv, gpgv2 or gpgv1 required for verification" issue, which requires a runc 1.0.0-rc93
   # https://stackoverflow.com/questions/66319610/gpg-error-in-ubuntu-21-04-after-second-apt-get-update-during-docker-build
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-  - sudo apt-get update
-  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+  # - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  # - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  # - sudo apt-get update
+  # - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
   
   # # gcloud initialization
   # - openssl aes-256-cbc -K $encrypted_5185800709ee_key -iv $encrypted_5185800709ee_iv -in globalse-198312.json.enc -out globalse-198312.json -d
