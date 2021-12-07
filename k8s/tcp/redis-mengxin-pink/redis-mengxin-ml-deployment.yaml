@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-mengxin-pink-deployment
+  namespace: tcp
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: redis-mengxin-pink
+  template:
+    metadata:
+      labels:
+        pod: redis-mengxin-pink
+    spec:
+      containers:
+        - name: redis-mengxin-pink
+          image: redis
+          ports:
+            - containerPort: 6379
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

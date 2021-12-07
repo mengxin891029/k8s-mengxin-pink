@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-mengxin-pink-deployment
+  namespace: web
+  labels:
+    app: chat
+    hostname: chat.mengxin.pink
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: chat-mengxin-pink
+  template:
+    metadata:
+      labels:
+        pod: chat-mengxin-pink
+    spec:
+      containers:
+        - name: chat-mengxin-pink
+          image: mengxin891029/chat-mengxin-pink
+          ports:
+            - name: chat-http
+              containerPort: 3000
+          env:
+            - name: JWTSIGN
+              valueFrom:
+                secretKeyRef:
+                  name: chat-mengxin-pink-config
+                  key: JWTSIGN
+            - name: PORT
+              valueFrom:
+                secretKeyRef:
+                  name: chat-mengxin-pink-config
+                  key: PORT
+            - name: REDISHOST
+              valueFrom:
+                secretKeyRef:
+                  name: chat-mengxin-pink-config
+                  key: REDISHOST
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
