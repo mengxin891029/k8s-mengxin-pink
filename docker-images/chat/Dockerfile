@@ -4,6 +4,8 @@ WORKDIR /usr/app
 
 COPY ./ ./
 
-RUN npm install -timeout=600000
+RUN npm config set fetch-retry-maxtimeout 60000
+
+RUN npm install -timeout=60000
 
 CMD ["npm","run","start"] 
