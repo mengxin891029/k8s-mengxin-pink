@@ -33,7 +33,7 @@ before_install:
   - kubectl config set-credentials admin --token="$K8S_TOKEN"
   - kubectl config set-cluster k8s.mengxin.pink --server="$K8S_SERVER"
   - kubectl config set-context k8s.mengxin.pink --user=admin --namespace=default --cluster=k8s.mengxin.pink
-  - kubectl config user-context k8s.mengxin.pink
+  - kubectl config use-context k8s.mengxin.pink
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   
   # Testing phase
