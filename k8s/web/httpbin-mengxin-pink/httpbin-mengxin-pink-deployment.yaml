@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: httpbin-mengxin-pink-deployment
+    namespace: web
+    labels:
+        app: httpbin
+        hostname: httpbin.mengxin.pink
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            pod: httpbin-mengxin-pink
+    template:
+        metadata:
+            labels:
+                pod: httpbin-mengxin-pink
+        spec:
+            containers:
+                - name: httpbin-mengxin-pink
+                  image: mccutchen/httpbin
+                  ports:
+                      - name: http
+                        containerPort: 80
+                  resources:
+                    limits:
+                        memory: "128Mi"
+                        cpu: "500m"

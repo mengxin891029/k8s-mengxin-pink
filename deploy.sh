@@ -7,7 +7,7 @@
 ###################################################################
 
 
-# update sea-mengxin-ml
+# update sea-mengxin-pink
 # docker build -t mengxin891029/sea-mengxin-ml:latest -t mengxin891029/sea-mengxin-ml:$GIT_SHA -f ./docker-images/sea/Dockerfile ./docker-images/sea
 docker buildx build --platform linux/amd64,linux/arm64 --push -t mengxin891029/sea-mengxin-pink:latest -t mengxin891029/sea-mengxin-pink:$GIT_SHA -f ./docker-images/sea/Dockerfile ./docker-images/sea
 docker push mengxin891029/sea-mengxin-pink:$GIT_SHA
@@ -44,8 +44,8 @@ kubectl set image --namespace web deployments/sea-mengxin-pink-deployment sea-me
 # # update argo-tunnel-tunnel-mengxin-ml
 # kubectl apply -f k8s/web/argo-tunnel-tunnel-mengxin-ml
 
-# # update httpbin-mengxin-ml
-# kubectl apply -f k8s/web/httpbin-mengxin-ml
+# # update httpbin-mengxin-pink
+kubectl apply -f k8s/web/httpbin-mengxin-pink
 
 # # update mongo-express-mengxin-ml
 # kubectl apply -f k8s/web/mongo-express-mengxin-ml
