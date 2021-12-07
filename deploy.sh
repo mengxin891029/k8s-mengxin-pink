@@ -9,11 +9,11 @@
 
 # update sea-mengxin-ml
 # docker build -t mengxin891029/sea-mengxin-ml:latest -t mengxin891029/sea-mengxin-ml:$GIT_SHA -f ./docker-images/sea/Dockerfile ./docker-images/sea
-docker buildx build --platform linux/amd64,linux/arm64 --push -t mengxin891029/sea-mengxin-ml:latest -t mengxin891029/sea-mengxin-ml:$GIT_SHA -f ./docker-images/sea/Dockerfile ./docker-images/sea
-# docker push mengxin891029/sea-mengxin-ml:$GIT_SHA
-# docker push mengxin891029/sea-mengxin-ml:latest
-kubectl apply -f k8s/web/sea-mengxin-ml
-kubectl set image --namespace web deployments/sea-mengxin-ml-deployment sea-mengxin-ml=mengxin891029/sea-mengxin-ml:$GIT_SHA
+docker buildx build --platform linux/amd64,linux/arm64 --push -t mengxin891029/sea-mengxin-pink:latest -t mengxin891029/sea-mengxin-pink:$GIT_SHA -f ./docker-images/sea/Dockerfile ./docker-images/sea
+docker push mengxin891029/sea-mengxin-pink:$GIT_SHA
+docker push mengxin891029/sea-mengxin-pink:latest
+kubectl apply -f k8s/web/sea-mengxin-pink
+kubectl set image --namespace web deployments/sea-mengxin-pink-deployment sea-mengxin-pink=mengxin891029/sea-mengxin-pink:$GIT_SHA
 
 
 # update chat-mengxin-ml

@@ -1,24 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sea-mengxin-ml-deployment
+  name: sea-mengxin-pink-deployment
   namespace: web
   labels:
     app: sea
-    hostname: sea.mengxin.ml
+    hostname: sea.mengxin.pink
 spec:
   replicas: 1
   selector:
     matchLabels:
-      pod: sea-mengxin-ml
+      pod: sea-mengxin-pink
   template:
     metadata:
       labels:
-        pod: sea-mengxin-ml
+        pod: sea-mengxin-pink
     spec:
       containers:
-        - name: sea-mengxin-ml
-          image: mengxin891029/sea-mengxin-ml
+        - name: sea-mengxin-pink
+          image: mengxin891029/sea-mengxin-pink
           ports:
             - name: http
               containerPort: 80
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
