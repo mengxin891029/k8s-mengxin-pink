@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sea-mengxin-ml-clusterip
+  namespace: web
+  labels:
+    app: sea-mengxin-ml
+spec:
+  selector:
+    pod: sea-mengxin-ml
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
