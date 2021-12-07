@@ -4,6 +4,6 @@ WORKDIR /usr/app
 
 COPY ./ ./
 
-RUN npm install
+RUN npm install -timeout=600000
 
 CMD ["npm","run","start"] 
