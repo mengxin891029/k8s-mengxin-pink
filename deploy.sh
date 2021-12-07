@@ -8,7 +8,6 @@
 
 
 # update sea-mengxin-pink
-# docker build -t mengxin891029/sea-mengxin-ml:latest -t mengxin891029/sea-mengxin-ml:$GIT_SHA -f ./docker-images/sea/Dockerfile ./docker-images/sea
 docker buildx build --platform linux/amd64,linux/arm64 --push -t mengxin891029/sea-mengxin-pink:latest -t mengxin891029/sea-mengxin-pink:$GIT_SHA -f ./docker-images/sea/Dockerfile ./docker-images/sea
 docker push mengxin891029/sea-mengxin-pink:$GIT_SHA
 docker push mengxin891029/sea-mengxin-pink:latest
@@ -41,10 +40,10 @@ kubectl set image --namespace web deployments/sea-mengxin-pink-deployment sea-me
 # kubectl apply -f k8s/web/grpc-mengxin-ml
 # kubectl set image --namespace web deployments/grpc-mengxin-ml-deployment grpc-mengxin-ml=mengxin891029/grpc-mengxin-ml:$GIT_SHA
 
-# # update argo-tunnel-tunnel-mengxin-ml
-# kubectl apply -f k8s/web/argo-tunnel-tunnel-mengxin-ml
+# update tunnel-mengxin-pink
+kubectl apply -f k8s/web/tunnel-mengxin-pink
 
-# # update httpbin-mengxin-pink
+# update httpbin-mengxin-pink
 kubectl apply -f k8s/web/httpbin-mengxin-pink
 
 # # update mongo-express-mengxin-ml
@@ -66,13 +65,13 @@ kubectl apply -f k8s/web/httpbin-mengxin-pink
 
 
 
-# ###################################################################
-# #                                                                 #
-# #                    Start of Kubenetes Update                    #
-# #                                                                 #
-# #                         Namespace: tcp                          #
-# #                                                                 #
-# ###################################################################
+###################################################################
+#                                                                 #
+#                    Start of Kubenetes Update                    #
+#                                                                 #
+#                         Namespace: tcp                          #
+#                                                                 #
+###################################################################
 
 
 # # update ssl-mengxin-ml-keyless
