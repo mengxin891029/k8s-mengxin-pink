@@ -28,6 +28,7 @@ before_install:
   # Installation phase
   - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
   - sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+  - sudo rm kubectl
 
   # Configuration phase
   - kubectl config set-credentials admin --token="$K8S_TOKEN"
