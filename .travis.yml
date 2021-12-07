@@ -41,6 +41,7 @@ before_install:
   # - docker build -t mengxin891029/test-sea-mengxin-ml -f ./docker-images/sea/dev/Dockerfile.dev ./docker-images/sea/dev
 
   # multi-architecture build
+  - apt-get install qemu qemu-user-static binfmt-support debootstrap -y
   - docker buildx create --name mybuilder --use
 
 # script:
