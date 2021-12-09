@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
-  name: tunnel-mengxin-pink-deployment
+  name: tunnel-mengxin-pink-daemonset
   namespace: web
   labels:
     app: tunnel
 spec:
-  replicas: 2
   selector:
     matchLabels:
       pod: tunnel-mengxin-pink
