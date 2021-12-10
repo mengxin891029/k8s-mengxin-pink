@@ -15,8 +15,6 @@ kubectl apply -f k8s/web/sea-mengxin-pink
 kubectl set image --namespace web deployments/sea-mengxin-pink-deployment sea-mengxin-pink=mengxin891029/sea-mengxin-pink:$GIT_SHA
 
 
-
-
 # update chat-mengxin-pink
 docker buildx build --platform linux/amd64,linux/arm64 --push -t mengxin891029/chat-mengxin-pink:latest -t mengxin891029/chat-mengxin-pink:$GIT_SHA -f ./docker-images/chat/Dockerfile ./docker-images/chat
 # docker push mengxin891029/chat-mengxin-pink:$GIT_SHA
@@ -24,14 +22,6 @@ docker buildx build --platform linux/amd64,linux/arm64 --push -t mengxin891029/c
 kubectl apply -f k8s/web/chat-mengxin-pink
 kubectl set image --namespace web deployments/chat-mengxin-pink-deployment chat-mengxin-pink=mengxin891029/chat-mengxin-pink:$GIT_SHA
 
-
-# # update tunnel-mengxin-ml
-# # docker build -t mengxin891029/tunnel-mengxin-ml:latest -t mengxin891029/tunnel-mengxin-ml:$GIT_SHA -f ./docker-images/tunnel/Dockerfile ./docker-images/tunnel
-# # docker push mengxin891029/tunnel-mengxin-ml:$GIT_SHA
-# # docker push mengxin891029/tunnel-mengxin-ml:latest
-# docker buildx build --platform linux/amd64,linux/arm64 --push -t mengxin891029/tunnel-mengxin-ml:latest -t mengxin891029/tunnel-mengxin-ml:$GIT_SHA -f ./docker-images/tunnel/Dockerfile ./docker-images/tunnel
-# kubectl apply -f k8s/web/tunnel-mengxin-ml
-# kubectl set image --namespace web deployments/tunnel-mengxin-ml-deployment tunnel-mengxin-ml=mengxin891029/tunnel-mengxin-ml:$GIT_SHA
 
 # # update grpc-mengxin-ml
 # # docker build -t mengxin891029/grpc-mengxin-ml:latest -t mengxin891029/grpc-mengxin-ml:$GIT_SHA -f ./docker-images/grpc/Dockerfile ./docker-images/grpc
@@ -41,11 +31,10 @@ kubectl set image --namespace web deployments/chat-mengxin-pink-deployment chat-
 # kubectl apply -f k8s/web/grpc-mengxin-ml
 # kubectl set image --namespace web deployments/grpc-mengxin-ml-deployment grpc-mengxin-ml=mengxin891029/grpc-mengxin-ml:$GIT_SHA
 
-# update tunnel-mengxin-pink
-kubectl apply -f k8s/web/tunnel-mengxin-pink
 
 # update httpbin-mengxin-pink
 kubectl apply -f k8s/web/httpbin-mengxin-pink
+
 
 # # update mongo-express-mengxin-ml
 # kubectl apply -f k8s/web/mongo-express-mengxin-ml
@@ -60,6 +49,10 @@ kubectl apply -f k8s/web/httpbin-mengxin-pink
 
 # # update general kubernetes namespace: web
 # kubectl apply -f k8s/web
+
+
+# update tunnel-mengxin-pink
+kubectl apply -f k8s/web/tunnel-mengxin-pink
 
 
 

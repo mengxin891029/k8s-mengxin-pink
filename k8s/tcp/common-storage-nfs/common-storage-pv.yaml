@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: common-storage-pv
+  namespace: tcp
+spec:
+  storageClassName: common-storage
+  capacity:
+    storage: 10G
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: tcp
+    name: common-storage-pvc
+  local:
+    path: /mnt/common-nfs-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - ras4-2-mengxin-pink
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: common-storage-pvc
+  namespace: tcp
+spec:
+  storageClassName: common-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10G

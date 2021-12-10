@@ -1,0 +1,50 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-mengxin-pink-deployment
+  namespace: tcp
+  labels:
+    app: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: mongo-mengxin-pink
+  template:
+    metadata:
+      labels:
+        pod: mongo-mengxin-pink
+    spec:
+      # volumes:
+        # - name: mongo-storage
+        #   persistentVolumeClaim:
+        #     claimName: mongo-storage-pvc
+      volumes:
+        - name: mongo-storage
+          nfs:
+            path: /mongo
+            server: common-storage-nfs-clusterip.tcp.svc.cluster.local
+      containers:
+        - name: mongo-mengxin-pink
+          image: mongo
+          ports:
+            - containerPort: 27017
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: mongo-storage
+              mountPath: /data/db
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-mengxin-pink-config
+                  key: MONGO_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-mengxin-pink-config
+                  key: MONGO_ROOT_PASSWORD
