@@ -13,7 +13,7 @@ spec:
     namespace: tcp
     name: common-storage-pvc
   local:
-    path: /mnt/common-nfs-storage
+    path: /mnt/common-storage-nfs
   nodeAffinity:
     required:
       nodeSelectorTerms:
