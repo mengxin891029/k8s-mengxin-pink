@@ -11,16 +11,18 @@ spec:
       pod: tunnel-mengxin-pink
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         pod: tunnel-mengxin-pink
     spec:
       containers:
         - name: tunnel-mengxin-pink
-          image: erisamoe/cloudflared
+          image: erisamoe/cloudflared:latest
           volumeMounts:
           - name: tunnel-mengxin-pink-configmap-volume
             mountPath: /etc/cloudflared
-          command: [ "/cloudflared", "tunnel", "run" ]
+          command: [ "/cloudflared", "tunnel","--no-autoupdate", "run" ]
           resources:
             limits:
               memory: "128Mi"

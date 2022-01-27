@@ -12,6 +12,9 @@ spec:
       pod: redis-mengxin-pink
   template:
     metadata:
+      annotations:
+        config.linkerd.io/opaque-ports: "6379"
+        linkerd.io/inject: enabled
       labels:
         pod: redis-mengxin-pink
     spec:

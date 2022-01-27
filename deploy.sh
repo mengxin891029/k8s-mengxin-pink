@@ -47,12 +47,12 @@ kubectl apply -f k8s/web/httpbin-mengxin-pink
 # kubectl apply -f k8s/web/jupyter-mengxin-ml
 # kubectl set image --namespace web deployments/jupyter-mengxin-ml-deployment jupyter-mengxin-ml=mengxin891029/jupyter-mengxin-ml:$GIT_SHA
 
-# # update general kubernetes namespace: web
-# kubectl apply -f k8s/web
-
-
 # update tunnel-mengxin-pink
 kubectl apply -f k8s/web/tunnel-mengxin-pink
+
+
+# # update general kubernetes namespace: web
+# kubectl apply -f k8s/web
 
 
 

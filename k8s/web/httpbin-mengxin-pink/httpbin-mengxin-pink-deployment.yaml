@@ -13,6 +13,8 @@ spec:
             pod: httpbin-mengxin-pink
     template:
         metadata:
+            annotations:
+                linkerd.io/inject: enabled
             labels:
                 pod: httpbin-mengxin-pink
         spec:
