@@ -19,17 +19,16 @@ spec:
       containers:
         - name: tunnel-mengxin-pink
           image: erisamoe/cloudflared:latest
-          volumeMounts:
-          - name: tunnel-mengxin-pink-configmap-volume
-            mountPath: /etc/cloudflared
-          command: [ "/cloudflared", "tunnel","--no-autoupdate", "run" ]
+          command: [ "/cloudflared", "--no-autoupdate","tunnel","run","--token","$(SERVICE_KEY)" ]
           resources:
             limits:
               memory: "128Mi"
               cpu: "500m"
-      volumes:
-        - name: tunnel-mengxin-pink-configmap-volume
-          configMap:
-            name: tunnel-mengxin-pink-configmap
+          env:
+            - name: SERVICE_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: tunnel-mengxin-pink-configmap
+                  key: service-key
       # restartPolicy: Never
 
