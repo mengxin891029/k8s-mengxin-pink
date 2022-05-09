@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-mengxin-pink-clusterip
+  namespace: web
+  labels:
+    app: grpc-mengxin-pink
+spec:
+  selector:
+    pod: grpc-mengxin-pink
+  type: ClusterIP
+  ports:
+    - name: grpc
+      port: 50051
+      targetPort: 50051

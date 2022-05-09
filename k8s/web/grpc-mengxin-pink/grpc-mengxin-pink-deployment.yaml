@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: grpc-mengxin-pink-deployment
+    namespace: web
+    labels:
+        app: grpc
+        hostname: grpc.mengxin.pink
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            pod: grpc-mengxin-pink
+    template:
+        metadata:
+            labels:
+                pod: grpc-mengxin-pink
+        spec:
+            containers:
+                - name: grpc-mengxin-pink
+                  image: mengxin891029/grpc-mengxin-pink
+                  ports:
+                      - name: grpc
+                        containerPort: 50051
+            
