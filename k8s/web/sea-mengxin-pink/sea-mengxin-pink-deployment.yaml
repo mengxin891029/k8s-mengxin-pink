@@ -21,6 +21,7 @@ spec:
       containers:
         - name: sea-mengxin-pink
           image: mengxin891029/sea-mengxin-pink
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 80
@@ -28,3 +29,7 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            # runAsNonRoot: true
+            # readOnlyRootFilesystem: true

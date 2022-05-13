@@ -19,11 +19,16 @@ spec:
       containers:
         - name: tunnel-mengxin-pink
           image: erisamoe/cloudflared:latest
+          imagePullPolicy: Always
           command: [ "/cloudflared", "--no-autoupdate","tunnel","run","--token","$(SERVICE_KEY)" ]
           resources:
             limits:
               memory: "128Mi"
               cpu: "500m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            # runAsNonRoot: true
+            readOnlyRootFilesystem: true
           env:
             - name: SERVICE_KEY
               valueFrom:

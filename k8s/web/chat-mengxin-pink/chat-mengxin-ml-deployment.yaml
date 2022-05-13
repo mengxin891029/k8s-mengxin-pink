@@ -21,6 +21,7 @@ spec:
       containers:
         - name: chat-mengxin-pink
           image: mengxin891029/chat-mengxin-pink
+          imagePullPolicy: Always
           ports:
             - name: chat-http
               containerPort: 3000
@@ -44,3 +45,7 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            # runAsNonRoot: true
+            readOnlyRootFilesystem: true

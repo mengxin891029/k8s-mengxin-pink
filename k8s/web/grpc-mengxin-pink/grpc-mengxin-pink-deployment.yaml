@@ -21,7 +21,12 @@ spec:
             containers:
                 - name: grpc-mengxin-pink
                   image: mengxin891029/grpc-mengxin-pink
+                  imagePullPolicy: Always
                   ports:
                       - name: grpc
                         containerPort: 50051
+                  securityContext:
+                        allowPrivilegeEscalation: false
+                        # runAsNonRoot: true
+                        readOnlyRootFilesystem: true
             
