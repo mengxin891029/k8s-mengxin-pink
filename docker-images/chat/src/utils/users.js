@@ -6,9 +6,7 @@ const client = redis.createClient({
 })
 
 // initialize redis
-client.flushdb(function(err,succeeded){
-    console.log(succeeded);
-})
+client.flushdb()
 
 
 /* 
