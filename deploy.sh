@@ -88,6 +88,8 @@ kubectl apply -f k8s/web/tunnel-mengxin-pink
 # # update mongo-mengxin-ml
 # kubectl apply -f k8s/tcp/mongo-mengxin-ml
 
+# update postgres-mengxin-pink
+kubectl apply -f k8s/tcp/postgres-mengxin-pink
 
 # update redis-mengxin-pink
 kubectl apply -f k8s/tcp/redis-mengxin-pink

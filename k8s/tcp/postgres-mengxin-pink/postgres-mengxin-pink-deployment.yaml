@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-mengxin-pink-deployment
+  namespace: tcp
+  labels:
+    app: postgres-mengxin-pink
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: postgres-mengxin-pink
+  template:
+    metadata:
+      labels:
+        pod: postgres-mengxin-pink
+    spec:
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-storage-pvc
+      containers:
+        - name: postgres-mengxin-pink
+          image: postgres
+          imagePullPolicy: Always
+          securityContext:
+            privileged: true
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "600m"          
+          ports:
+            - name: postgres
+              containerPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-mengxin-pink-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-mengxin-pink-secret
+                  key: POSTGRES_USER
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+            
+
