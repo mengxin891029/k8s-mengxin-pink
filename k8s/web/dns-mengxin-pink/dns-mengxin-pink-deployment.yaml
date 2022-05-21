@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: dns-mengxin-pink-deployment
+    namespace: web
+    labels:
+        app: dns
+        hostname: dns.mengxin.pink
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            pod: dns-mengxin-pink
+    template:
+        metadata:
+            # annotations:
+            #     linkerd.io/inject: enabled
+            labels:
+                pod: dns-mengxin-pink
+        spec:
+            volumes:
+              - name: pihole-storage
+                persistentVolumeClaim:
+                  claimName: pihole-storage-pvc
+            containers:
+                - name: dns-mengxin-pink
+                  image: pihole/pihole
+                  imagePullPolicy: Always
+                  # securityContext:
+                  #   runAsUser: 0
+                  #   runAsGroup: 0
+                  ports:
+                      - name: http
+                        containerPort: 80
+                        protocol: TCP
+                      - name: https
+                        containerPort: 443
+                        protocol: TCP
+                      - name: dns-tcp
+                        containerPort: 53
+                        protocol: TCP
+                      - name: dns-udp
+                        containerPort: 53
+                        protocol: UDP
+                  resources:
+                    requests:
+                        memory: "128Mi"
+                        cpu: "100m"
+                    limits:
+                        memory: "2Gi"
+                        cpu: "1"
+                  volumeMounts:
+                    - name: pihole-storage
+                      mountPath: /etc/pihole
+                      subPath: "pihole"
+                    - name: pihole-storage
+                      mountPath: /etc/dnsmasq.d
+                      subPath: "dnsmasq"
+                  env:
+                    - name: WEBPASSWORD
+                      valueFrom:
+                        secretKeyRef:
+                          key: password
+                          name: dns-mengxin-pink-secret
+                #   securityContext:
+                #         allowPrivilegeEscalation: false
+                        # runAsNonRoot: true
+                        # readOnlyRootFilesystem: true

@@ -1,0 +1,63 @@
+# mengxin-storage-usb-1
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mengxin-storage-usb-1-pv
+  namespace: tcp
+spec:
+  storageClassName: mengxin-storage-usb-1
+  capacity:
+    storage: 1G
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: tcp
+    name: mengxin-storage-usb-1-pvc
+  nfs:
+    path: /mnt/mengxin-storage-usb-1
+    server: 10.1.0.2
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mengxin-storage-usb-1-pvc
+  namespace: tcp
+spec:
+  storageClassName: mengxin-storage-usb-1
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1G
+---
+# mengxin-storage-usb-2
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mengxin-storage-usb-2-pv
+  namespace: tcp
+spec:
+  storageClassName: mengxin-storage-usb-2
+  capacity:
+    storage: 1G
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: tcp
+    name: mengxin-storage-usb-2-pvc
+  nfs:
+    path: /mnt/mengxin-storage-usb-2
+    server: 10.1.0.3
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mengxin-storage-usb-2-pvc
+  namespace: tcp
+spec:
+  storageClassName: mengxin-storage-usb-2
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1G

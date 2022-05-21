@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smb-mengxin-pink-deployment
+  namespace: tcp
+  labels:
+    app: smb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: smb-mengxin-pink
+  template:
+    metadata:
+      labels:
+        pod: smb-mengxin-pink
+    spec:
+      volumes:
+        - name: mengxin-storage-usb-1
+          persistentVolumeClaim:
+            claimName: mengxin-storage-usb-1-pvc
+        - name: mengxin-storage-usb-2
+          persistentVolumeClaim:
+            claimName: mengxin-storage-usb-2-pvc
+      containers:
+        - name: smb-mengxin-pink
+          image: dperson/samba
+          ports:
+            - containerPort: 445
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          env:
+            - name: PERMISSION
+              value: 'rw'
+            - name: USER1
+              valueFrom:
+                secretKeyRef:
+                  key: user1
+                  name: smb-mengxin-pink-secret
+            - name: SHARE1
+              value: 'mengxin-storage-usb-1;/mnt/mengxin-storage-usb-1;yes;no;no;mengxin'
+            - name: SHARE2
+              value: 'mengxin-storage-usb-2;/mnt/mengxin-storage-usb-2;yes;no;no;mengxin'
+          volumeMounts:
+            - name: mengxin-storage-usb-1
+              mountPath: /mnt/mengxin-storage-usb-1
+            - name: mengxin-storage-usb-2
+              mountPath: /mnt/mengxin-storage-usb-2
